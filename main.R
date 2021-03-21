@@ -12,7 +12,9 @@ script_name <- ifelse(
 )
 
 file_list <- ctx$client$projectDocumentService$findFileByLastModifiedDate()
+print(file_list)
 names_list <- unlist(lapply(file_list, function(x) x$name))
+print(script_name)
 script_id <- which(names_list == script_name)
 if(!length(script_id)) stop("Script not found, check file name.")
 
