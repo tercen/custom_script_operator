@@ -12,7 +12,8 @@ script_name <- ifelse(
 )
 
 file_list <- ctx$client$projectDocumentService$findFileByLastModifiedDate()
-script_id <- which(unlist(lapply(file_list, function(x) x$name)) == script_name)[[1]]
+names_list <- unlist(lapply(file_list, function(x) x$name))
+script_id <- which(names_list == script_name)
 if(!length(script_id)) stop("Script not found, check file name.")
 
 bytes <- ctx$client$fileService$download(file_list[[script_id[1]]]$id)
